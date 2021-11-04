@@ -243,8 +243,17 @@ function overlap(element1, element2) {
 
 function addBee (){
     let nbBees = document.getElementById("nbBees").value;
+    nbBees = Number(nbBees); 
     nbBees = nbBees  + 1;
-    makeBees();
+    
+    var bee = new Bee(nbBees);
+    bee.display();
+    bees.push(bee);
+
+    document.getElementById("nbBees").value = nbBees;
 }
 
-document.getElementById('addbee').addEventListener('click', addBee);
+function restart(){
+    location.reload();
+}
+
