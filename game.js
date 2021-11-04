@@ -154,8 +154,8 @@ function makeBees() {
     //try converting the content of the input to a number 
     if (isNaN(nbBees)) { 
         //check that the input field contains a valid number
-    window.alert("Invalid number of bees"); 
-    return;
+        window.alert("Invalid number of bees"); 
+        return;
     }
 
     //create bees
@@ -241,4 +241,10 @@ function overlap(element1, element2) {
     return true; 
 }
 
-document.getElementById('restart').addEventListener('click', start);
+function addBee (){
+    let nbBees = document.getElementById("nbBees").value;
+    nbBees = nbBees  + 1;
+    makeBees();
+}
+
+document.getElementById('addbee').addEventListener('click', addBee);
