@@ -58,7 +58,7 @@ bear.move(0, 1)
 }
 
 
-function start() {
+function start() { 
     //create bear
     bear = new Bear();
     // Add an event listener to the keypress event.
@@ -68,6 +68,9 @@ function start() {
     //create bees
     makeBees();
     updateBees();
+    //take this start time
+    lastStingTime = new Date();
+
 }
 
 
@@ -181,13 +184,16 @@ function moveBees() {
     } 
 }
 
-function updateBees() { 
-    // update loop for game 
+function updateBees() { // update loop for game 
     //move the bees randomly
     moveBees();
-    //use a fixed update period
     let period = document.getElementById("periodTimer").value;; //modify this to control refresh period 
-    //update the timer for the next move
+    let score = hits.innerHTML;
+    //check if the score is >1000
+    if (score >1000){
+        window.alert("GAME OVER!");
+        clearTimeout(updateTimer);
+    }else //update the timer for the next 
     updateTimer = setTimeout('updateBees()', period);
 }
 
@@ -196,8 +202,21 @@ function isHit(defender, offender) {
         let score = hits.innerHTML;
         score = Number(score) + 1; //increment the score
         hits.innerHTML = score; //display the new score 
+        //calculate longest duration
+        let newStingTime = new Date();
+        let thisDuration = newStingTime - lastStingTime;
+        lastStingTime = newStingTime;
+        let longestDuration = Number(duration.innerHTML);
+        if (longestDuration === 0) {
+            longestDuration = thisDuration;
+        } else {
+            if (longestDuration < thisDuration) longestDuration = thisDuration;
+        }
+            document.getElementById("duration").innerHTML = longestDuration;
     }
 }
+
+
 
 function overlap(element1, element2) {
     //consider the two rectangles wrapping the two elements 
@@ -221,3 +240,5 @@ function overlap(element1, element2) {
     }
     return true; 
 }
+
+document.getElementById('restart').addEventListener('click', start);
