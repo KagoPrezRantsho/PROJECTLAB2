@@ -70,6 +70,7 @@ function start() {
     updateBees();
     //take this start time
     lastStingTime = new Date();
+    document.getElementById("speedBear").addEventListener("change", setSpeed);
 
 }
 
@@ -257,3 +258,6 @@ function restart(){
     location.reload();
 }
 
+function setSpeed(){
+    bear.dBear = parseInt(document.getElementById("speedBear").value);
+}
